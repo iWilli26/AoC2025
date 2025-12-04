@@ -45,6 +45,54 @@ MapChar* create_map_char(const char *filename) {
     return map;
 }
 
+void place_num(MapNum* map, unsigned long long x, unsigned long long y, unsigned long long value) {
+    map->points[x][y].value = value;
+}
+
+void place_char(MapChar* map, unsigned long long x, unsigned long long y, char value){
+    map->points[x][y].value = value;
+}
+
+void replace_num(MapNum* map, unsigned long long old_value, unsigned long long new_value, unsigned long long count) {
+    for (unsigned long long y = 0; y < map->height; y++) {
+        for (unsigned long long x = 0; x < map->width; x++) {
+            if (map->points[y][x].value == old_value && count > 0) {
+                map->points[y][x].value = new_value;
+                count++;
+            }
+        }
+    }
+}
+
+void replace_char(MapChar* map, char old_value, char new_value, unsigned long long count) {
+    for (unsigned long long y = 0; y < map->height; y++) {
+        for (unsigned long long x = 0; x < map->width; x++) {
+            if (map->points[y][x].value == old_value && count > 0) {
+                map->points[y][x].value = new_value;
+                count++;
+            }
+        }
+    }
+}
+
+void print_map_char(MapChar* map) {
+    for (unsigned long long y = 0; y < map->height; y++) {
+        for (unsigned long long x = 0; x < map->width; x++) {
+            printf("%c", map->points[y][x].value);
+        }
+        printf("\n");
+    }
+}
+
+void print_map_num(MapNum* map) {
+    for (unsigned long long y = 0; y < map->height; y++) {
+        for (unsigned long long x = 0; x < map->width; x++) {
+            printf("%llu ", map->points[y][x].value);
+        }
+        printf("\n");
+    }
+}
+
 void free_map_num(MapNum* map) {
     for (unsigned long long y = 0; y < map->height; y++) {
         free(map->points[y]);

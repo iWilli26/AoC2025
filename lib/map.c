@@ -45,15 +45,31 @@ MapChar* create_map_char(const char *filename) {
     return map;
 }
 
-void place_num(MapNum* map, unsigned long long x, unsigned long long y, unsigned long long value) {
+void find_char(PointChar *res, const MapChar* map,const char target) {
+    for (int j = 0; j < map->height; j++) {
+        for (int i = 0; i < map->width; i++) {
+            if (map->points[j][i].value == target) {
+                res->x = i;
+                res->y = j;
+                res->value = target;
+                return;
+            }
+        }
+    }
+    res->x = -1;
+    res->y = -1;
+    res->value = '\0';
+}
+
+void place_num(MapNum* map, long long x, long long y, long long value) {
     map->points[x][y].value = value;
 }
 
-void place_char(MapChar* map, unsigned long long x, unsigned long long y, char value){
+void place_char(MapChar* map, long long x, long long y, char value){
     map->points[x][y].value = value;
 }
 
-void replace_num(MapNum* map, unsigned long long old_value, unsigned long long new_value, unsigned long long count) {
+void replace_num(MapNum* map, long long old_value, long long new_value, unsigned long long count) {
     for (unsigned long long y = 0; y < map->height; y++) {
         for (unsigned long long x = 0; x < map->width; x++) {
             if (map->points[y][x].value == old_value && count > 0) {
@@ -76,7 +92,7 @@ void replace_char(MapChar* map, char old_value, char new_value, unsigned long lo
 }
 
 void print_map_char(MapChar* map) {
-    for (unsigned long long y = 0; y < map->height; y++) {
+    for (unsigned long long y = 0; y < map->height ; y++) {
         for (unsigned long long x = 0; x < map->width; x++) {
             printf("%c", map->points[y][x].value);
         }

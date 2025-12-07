@@ -6,34 +6,34 @@
 #define AOC2025_MAP_H
 
 typedef struct {
-    unsigned long long x;
-    unsigned long long y;
+    long long x;
+    long long y;
     char value;
 } PointChar;
 
 typedef struct {
-    unsigned long long x;
-    unsigned long long y;
-    unsigned long long value;
+    long long x;
+    long long y;
+    long long value;
 } PointNum;
 
 typedef struct {
-    unsigned long long width;
-    unsigned long long height;
+    long long width;
+    long long height;
     PointNum **points;
 } MapNum;
 
 typedef struct {
-    unsigned long long width;
-    unsigned long long height;
+    long long width;
+    long long height;
     PointChar **points;
 } MapChar;
 
-void place_num(MapNum* map, unsigned long long x, unsigned long long y, unsigned long long value);
+void place_num(MapNum* map, long long x, long long y, long long value);
 
-void place_char(MapChar* map, unsigned long long x, unsigned long long y, char value);
+void place_char(MapChar* map, long long x, long long y, char value);
 
-void replace_num(MapNum* map, unsigned long long old_value, unsigned long long new_value, unsigned long long count);
+void replace_num(MapNum* map, long long old_value, long long new_value, unsigned long long count);
 
 void replace_char(MapChar* map, char old_value, char new_value, unsigned long long count);
 
@@ -46,5 +46,7 @@ void free_map_char(MapChar* map);
 void print_map_char(MapChar* map);
 
 void print_map_num(MapNum* map);
+
+void find_char(PointChar *res, const MapChar* map,const char target);
 
 #endif //AOC2025_MAP_H

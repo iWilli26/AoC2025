@@ -10,11 +10,20 @@ char **read_file_lines(const char *filename, int *num_lines) {
   }
 
   int line_count = 0;
-  char buffer[1024];
+  char buffer[4096];
   while (fgets(buffer, sizeof(buffer), file) != NULL) {
-    line_count++;
+    int len = strlen(buffer);
+    if (len > 0 && buffer[len - 1] == '\n') {
+      len--;
+    }
+    if (len > 0 && buffer[len - 1] == '\r') {
+      len--;
+    }
+    if (len > 0) {
+      line_count++;
+    }
   }
-
+  printf("line_count = %d\n", line_count);
   char **lines = malloc(line_count * sizeof(char *));
 
   rewind(file);
@@ -22,6 +31,7 @@ char **read_file_lines(const char *filename, int *num_lines) {
   int index = 0;
   while (fgets(buffer, sizeof(buffer), file) != NULL && index < line_count) {
     int len = strlen(buffer);
+
     if (len > 0 && buffer[len - 1] == '\n') {
       buffer[len - 1] = '\0';
       len--;
@@ -29,7 +39,9 @@ char **read_file_lines(const char *filename, int *num_lines) {
     if (len > 0 && buffer[len - 1] == '\r') {
       buffer[len - 1] = '\0';
     }
-
+    if (len == 0) {
+      continue;
+    }
     lines[index] = malloc((strlen(buffer) + 1) * sizeof(char));
     if (lines[index] == NULL) {
       for (int i = 0; i < index; i++) {

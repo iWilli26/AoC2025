@@ -1,8 +1,6 @@
+#include "07/07.h"
 
-#include "04/04.h"
-#include "lib/base.h"
 int main(void) {
-    ex42();
-
+    ex73();
     return 0;
 }

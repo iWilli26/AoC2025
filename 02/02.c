@@ -83,5 +83,5 @@ bool checkValuePart2(char *valueStr, int lengthToCheck) {
 //   return 0;
 // }
 
-// gcc -Wall -Wextra -g3 -I./lib ./01/01.c ./lib/base.c -o ./01/e.exe
+// gcc -Wall -Wextra -g3 -I./lib ./08/08.c ./lib/base.c -o ./08/e.exe
 // ./01/e.exe

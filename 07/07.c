@@ -207,10 +207,12 @@ long long descending_beam3(MapChar *map) {
     printf("Final row blocks: ");
     for (long long x = 0; x < map->width; x++) {
         if (blocks[map->height - 1][x] > 0) {
+            printf("colonne %lld=%lld ", x, blocks[map->height - 1][x]);
             total += blocks[map->height - 1][x];
         }
     }
     printf("\n");
+
     for (size_t i = 0; i < map->height; i++) {
         free(blocks[i]);
     }
